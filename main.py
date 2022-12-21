@@ -11,6 +11,12 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from functools import wraps
+import os
+
+# Learned how to host our code on a website on heroku or render. A lot to unpack here. First, create a git repo and push our code onto github.
+# Make sure to include a requirements.txt so the 3rd party website knows what packages to install. Also, install gunicorn add a Procfile file and include
+# web: gunicorn main:app. This well tell the 3rd party website to host through gunicorn and to direct them to our main.py file where our "app" is. In order
+# to have a database on these websites, install psycopg2-binary b/c our database is running on postgres instead of sqlite.
 
 
 # Big lesson today, the main things were creating a relational database and authorizing users on our site to have access to certain pages based on credentials
@@ -29,12 +35,12 @@ app.app_context().push()
 
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "LMAO101")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///blog.db")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
