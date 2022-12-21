@@ -37,6 +37,7 @@ app.app_context().push()
 gravatar = Gravatar(app, size=100, rating='g', default='retro', force_default=False, force_lower=False, use_ssl=False, base_url=None)
 
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "LMAO101")
+app.config['WTF_CSRF_ENABLED'] = True
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
