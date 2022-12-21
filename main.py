@@ -18,6 +18,7 @@ import os
 # web: gunicorn main:app. This well tell the 3rd party website to host through gunicorn and to direct them to our main.py file where our "app" is. In order
 # to have a database on these websites, install psycopg2-binary b/c our database is running on postgres instead of sqlite.
 
+# Use pip freeze > requirements.txt to create rquements page
 
 # Big lesson today, the main things were creating a relational database and authorizing users on our site to have access to certain pages based on credentials
 # Learned about hashing and salting passwords
